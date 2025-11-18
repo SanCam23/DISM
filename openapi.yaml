@@ -1,0 +1,580 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: info@dtic.org
+  description: API para sistema de registro horario - Práctica 1 DISM
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Sistema de Registro Horario DISM
+  version: 1.0.0
+servers:
+  - description: Servidor ApiRest DTIC
+    url: http://localhost:8080
+paths:
+  /holamundo:
+    get:
+      description: GET Hola Mundo
+      operationId: holamundoGET
+      parameters:
+        - description: nombre Entrada Hola Mundo
+          explode: true
+          in: query
+          name: nombreEntradaHolaMundo
+          required: true
+          schema:
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_holamundo_get_200_response"
+          description: Respuesta Hola Mundo Correcto
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_holamundo_get_400_response"
+          description: Hola Mundo Error
+      tags:
+        - HolaMundoServicio
+      x-eov-operation-handler: controllers/HolaMundoServicioController
+
+  /usuarios:
+    get:
+      summary: Obtener todos los usuarios
+      operationId: getUsuarios
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
+        '500':
+          description: Error del servidor
+      tags:
+        - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+    post:
+      summary: Crear un nuevo usuario
+      operationId: createUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioInput'
+      responses:
+        '201':
+          description: Usuario creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResponse'
+        '500':
+          description: Error del servidor
+      tags:
+        - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+
+  /usuarios/{id}:
+    get:
+      summary: Obtener un usuario por ID
+      operationId: getUsuarioById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '404':
+          description: Usuario no encontrado
+        '500':
+          description: Error del servidor
+      tags:
+        - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+    put:
+      summary: Actualizar un usuario por ID
+      operationId: updateUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioInput'
+      responses:
+        '200':
+          description: Usuario actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '404':
+          description: Usuario no encontrado
+        '500':
+          description: Error del servidor
+      tags:
+        - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+    delete:
+      summary: Eliminar un usuario por ID
+      operationId: deleteUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Usuario eliminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '404':
+          description: Usuario no encontrado
+        '500':
+          description: Error del servidor
+      tags:
+        - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+
+  /usuarios/login:
+    post:
+      summary: Login de usuario
+      operationId: loginUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginInput'
+      responses:
+        '200':
+          description: Login exitoso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Credenciales incorrectas
+        '500':
+          description: Error del servidor
+      tags:
+        - Usuarios
+      x-eov-operation-handler: controllers/UsuariosController
+
+  /trabajos:
+    get:
+      summary: Obtener todos los trabajos
+      operationId: getTrabajos
+      responses:
+        '200':
+          description: Lista de trabajos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trabajo'
+        '500':
+          description: Error del servidor
+      tags:
+        - Trabajos
+      x-eov-operation-handler: controllers/TrabajosController
+    post:
+      summary: Crear un nuevo trabajo
+      operationId: createTrabajo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrabajoInput'
+      responses:
+        '201':
+          description: Trabajo creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResponse'
+        '500':
+          description: Error del servidor
+      tags:
+        - Trabajos
+      x-eov-operation-handler: controllers/TrabajosController
+
+  /trabajos/{id}:
+    get:
+      summary: Obtener un trabajo por ID
+      operationId: getTrabajoById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Trabajo encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trabajo'
+        '404':
+          description: Trabajo no encontrado
+        '500':
+          description: Error del servidor
+      tags:
+        - Trabajos
+      x-eov-operation-handler: controllers/TrabajosController
+    put:
+      summary: Actualizar un trabajo por ID
+      operationId: updateTrabajo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrabajoInput'
+      responses:
+        '200':
+          description: Trabajo actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '404':
+          description: Trabajo no encontrado
+        '500':
+          description: Error del servidor
+      tags:
+        - Trabajos
+      x-eov-operation-handler: controllers/TrabajosController
+    delete:
+      summary: Eliminar un trabajo por ID
+      operationId: deleteTrabajo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Trabajo eliminado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '404':
+          description: Trabajo no encontrado
+        '500':
+          description: Error del servidor
+      tags:
+        - Trabajos
+      x-eov-operation-handler: controllers/TrabajosController
+
+  /fichajes:
+    get:
+      summary: Obtener todos los fichajes
+      operationId: getFichajes
+      responses:
+        '200':
+          description: Lista de fichajes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fichaje'
+        '500':
+          description: Error del servidor
+      tags:
+        - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+    post:
+      summary: Crear un nuevo fichaje (entrada)
+      operationId: createFichaje
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FichajeInput'
+      responses:
+        '201':
+          description: Fichaje de entrada creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResponse'
+        '400':
+          description: Ya existe un fichaje abierto
+        '500':
+          description: Error del servidor
+      tags:
+        - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+
+  /fichajes/usuario:
+    get:
+      summary: Obtener fichajes por usuario y rango de fechas
+      operationId: getFichajesByUsuario
+      parameters:
+        - name: usuarioId
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: fechaInicio
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: fechaFin
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Lista de fichajes filtrados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fichaje'
+        '500':
+          description: Error del servidor
+      tags:
+        - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+
+  /fichajes/actual/{usuarioId}:
+    get:
+      summary: Obtener el fichaje actual de un usuario (últimas 12 horas)
+      operationId: getFichajeActual
+      parameters:
+        - name: usuarioId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Fichaje actual encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fichaje'
+        '404':
+          description: No hay fichaje activo
+        '500':
+          description: Error del servidor
+      tags:
+        - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+
+  /fichajes/{id}/finalizar:
+    put:
+      summary: Finalizar un fichaje (salida)
+      operationId: finalizarFichaje
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Fichaje finalizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinalizarFichajeResponse'
+        '404':
+          description: Fichaje no encontrado
+        '400':
+          description: El fichaje ya está finalizado
+        '500':
+          description: Error del servidor
+      tags:
+        - Fichajes
+      x-eov-operation-handler: controllers/FichajesController
+
+components:
+  schemas:
+    _holamundo_get_200_response:
+      type: object
+      properties:
+        nombre:
+          type: string
+        contador:
+          type: integer
+      example:
+        contador: 0
+        nombre: nombre
+
+    _holamundo_get_400_response:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: message
+
+    Usuario:
+      type: object
+      properties:
+        IdUsuario:
+          type: integer
+        Nombre:
+          type: string
+        Usuario:
+          type: string
+        Clave:
+          type: string
+
+    UsuarioInput:
+      type: object
+      properties:
+        Nombre:
+          type: string
+        Usuario:
+          type: string
+        Clave:
+          type: string
+      required:
+        - Nombre
+        - Usuario
+        - Clave
+
+    LoginInput:
+      type: object
+      properties:
+        Usuario:
+          type: string
+        Clave:
+          type: string
+      required:
+        - Usuario
+        - Clave
+
+    LoginResponse:
+      type: object
+      properties:
+        usuario:
+          $ref: '#/components/schemas/Usuario'
+        message:
+          type: string
+
+    Trabajo:
+      type: object
+      properties:
+        IdTrabajo:
+          type: integer
+        Nombre:
+          type: string
+
+    TrabajoInput:
+      type: object
+      properties:
+        Nombre:
+          type: string
+      required:
+        - Nombre
+
+    Fichaje:
+      type: object
+      properties:
+        IdFichaje:
+          type: integer
+        FechaHoraEntrada:
+          type: string
+          format: date-time
+        FechaHoraSalida:
+          type: string
+          format: date-time
+        HorasTrabajadas:
+          type: integer
+        IdTrabajo:
+          type: integer
+        IdUsuario:
+          type: integer
+        GeolocalizacionLatitud:
+          type: number
+          format: float
+        GeolocalizacionLongitud:
+          type: number
+          format: float
+        UsuarioNombre:
+          type: string
+        TrabajoNombre:
+          type: string
+
+    FichajeInput:
+      type: object
+      properties:
+        IdUsuario:
+          type: integer
+        IdTrabajo:
+          type: integer
+        GeolocalizacionLatitud:
+          type: number
+          format: float
+        GeolocalizacionLongitud:
+          type: number
+          format: float
+      required:
+        - IdUsuario
+        - IdTrabajo
+
+    CreateResponse:
+      type: object
+      properties:
+        IdUsuario:
+          type: integer
+        message:
+          type: string
+
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+
+    FinalizarFichajeResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        horasTrabajadas:
+          type: integer

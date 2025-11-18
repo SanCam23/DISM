@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Consulta de Fichajes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Selección de usuario -->
+  <ion-item>
+    <ion-label>Usuario</ion-label>
+    <ion-select placeholder="Selecciona usuario" [(ngModel)]="usuarioSeleccionado">
+      <ion-select-option *ngFor="let u of usuarios" [value]="u.IdUsuario">
+        {{ u.Nombre }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Selección de fecha -->
+  <ion-item>
+    <ion-label position="floating">Fecha</ion-label>
+    <ion-datetime presentation="date" [(ngModel)]="fechaInicio"></ion-datetime>
+  </ion-item>
+
+  <!-- Botón de consulta -->
+  <ion-button expand="block" color="primary" (click)="consultarFichajes()">
+    Consultar Fichajes
+  </ion-button>
+
+  <!-- Listado de resultados -->
+  <ion-card *ngFor="let f of fichajes">
+    <ion-card-header>
+      <ion-card-title>{{ f.TrabajoNombre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Entrada:</strong> {{ f.FechaHoraEntrada | date:'short' }}</p>
+      <p><strong>Salida:</strong>
+        {{ f.FechaHoraSalida ? (f.FechaHoraSalida | date:'short') : 'No finalizado' }}
+      </p>
+      <p><strong>Horas trabajadas:</strong> {{ f.HorasTrabajadas || '-' }}</p>
+      <p><strong>Latitud:</strong> {{ f.GeolocalizacionLatitud }}</p>
+      <p><strong>Longitud:</strong> {{ f.GeolocalizacionLongitud }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Mensaje cuando no hay resultados -->
+  <ion-text color="medium" *ngIf="fichajes.length === 0 && consultaRealizada">
+    <p class="ion-text-center">No hay fichajes para ese usuario en esa fecha.</p>
+  </ion-text>
+
+</ion-content>

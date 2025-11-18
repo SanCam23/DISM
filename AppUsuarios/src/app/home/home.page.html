@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>App Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bienvenido</ion-card-title>
+      <ion-card-subtitle>Seleccione una opción</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button expand="block" routerLink="/registrar-fichaje">
+        Registrar Fichaje
+      </ion-button>
+      <ion-button expand="block" color="secondary" routerLink="/consulta-fichajes">
+        Consultar Fichajes
+      </ion-button>
+      
+      <ion-button expand="block" color="warning" (click)="ejecutarCierreManual()" style="margin-top: 20px;">
+        <ion-icon name="warning" slot="start"></ion-icon>
+        Forzar Cierre de Fichajes
+      </ion-button>
+      </ion-card-content>
+  </ion-card>
+</ion-content>

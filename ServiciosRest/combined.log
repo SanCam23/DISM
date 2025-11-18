@@ -1,0 +1,59 @@
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-28T16:04:50.545Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-28T16:07:51.175Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-28T16:11:09.084Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-28T17:26:44.229Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-28T17:28:56.325Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-28T17:31:45.389Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-29T09:12:02.947Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-29T11:10:34.456Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-29T11:14:54.264Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-29T11:19:10.685Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-29T11:29:46.989Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-29T11:30:46.117Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-29T11:33:55.704Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-09-30T09:27:10.378Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-14T09:39:53.759Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-14T11:53:54.039Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-14T11:55:58.620Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-14T12:07:58.733Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-14T12:16:42.173Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-16T16:57:49.013Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-16T17:03:38.778Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-21T09:17:30.765Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-21T09:36:49.834Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-21T09:52:09.641Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-21T10:11:58.586Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-21T10:13:49.278Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-25T09:30:42.825Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-25T20:34:21.300Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-25T20:36:46.204Z"}
+{"level":"info","message":"Express server running","service":"user-service","timestamp":"2025-10-25T20:45:02.024Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"user-service","timestamp":"2025-10-25T20:48:16.503Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-25T20:49:22.405Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-25T21:23:43.202Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T09:20:30.703Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T19:20:48.414Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T19:34:23.700Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T19:36:08.785Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T19:37:57.961Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T19:39:08.997Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T19:44:55.093Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T19:47:44.207Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T20:21:21.557Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T20:28:04.003Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T20:32:18.691Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-26T20:36:41.622Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-27T17:32:49.214Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-27T17:36:42.972Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-27T17:38:39.704Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-27T22:07:16.302Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-28T10:12:14.132Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-28T10:15:15.063Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-28T10:19:08.982Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-10-28T10:40:22.195Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-03T17:49:40.949Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-03T17:58:45.209Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-03T18:00:34.050Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-03T18:03:51.176Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-03T18:13:51.937Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-03T18:28:57.301Z"}
