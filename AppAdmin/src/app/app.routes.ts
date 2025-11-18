@@ -18,4 +18,8 @@ export const routes: Routes = [
     path: 'gestion-trabajos',
     loadComponent: () => import('./pages/gestion-trabajos/gestion-trabajos.page').then( m => m.GestionTrabajosPage)
   },
+  {
+    path: 'gestion-fichajes',
+    loadComponent: () => import('./pages/gestion-fichajes/gestion-fichajes.page').then( m => m.GestionFichajesPage)
+  },
 ];

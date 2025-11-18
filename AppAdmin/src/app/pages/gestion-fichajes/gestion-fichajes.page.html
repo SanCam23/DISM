@@ -1,0 +1,125 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Histórico Fichajes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+<ion-grid class="filtros-container">
+    <ion-row>
+      <ion-col size="12">
+        <ion-select placeholder="Selecciona Usuario" [(ngModel)]="filtroUsuario" interface="popover" fill="outline">
+          <ion-select-option [value]="null">Todos los usuarios</ion-select-option>
+          <ion-select-option *ngFor="let u of usuarios" [value]="u.IdUsuario">
+            {{ u.Nombre }}
+          </ion-select-option>
+        </ion-select>
+      </ion-col>
+      
+      <ion-col size="6" class="ion-text-center">
+        <ion-button id="trigger-inicio" fill="outline" size="small" color="medium">
+          {{ filtroFechaInicio ? (filtroFechaInicio | date:'dd/MM/yy') : 'Desde' }}
+          <ion-icon slot="end" name="calendar-outline"></ion-icon>
+        </ion-button>
+        
+        <ion-popover trigger="trigger-inicio" [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime 
+              presentation="date" 
+              [(ngModel)]="filtroFechaInicio"
+              [showDefaultButtons]="true"
+              doneText="OK"
+              cancelText="Cancelar">
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-col>
+
+      <ion-col size="6" class="ion-text-center">
+        <ion-button id="trigger-fin" fill="outline" size="small" color="medium">
+          {{ filtroFechaFin ? (filtroFechaFin | date:'dd/MM/yy') : 'Hasta' }}
+          <ion-icon slot="end" name="calendar-outline"></ion-icon>
+        </ion-button>
+
+        <ion-popover trigger="trigger-fin" [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime 
+              presentation="date" 
+              [(ngModel)]="filtroFechaFin"
+              [showDefaultButtons]="true"
+              doneText="OK"
+              cancelText="Cancelar">
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-button expand="block" (click)="buscar()">
+          <ion-icon slot="start" name="search-outline"></ion-icon>
+          Filtrar Resultados
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+    <ion-item *ngFor="let f of fichajes">
+      <ion-label>
+        <h2>{{ f.UsuarioNombre }}</h2>
+        <h3>{{ f.TrabajoNombre }}</h3>
+        <p>
+          <ion-icon name="time-outline" style="vertical-align: middle;"></ion-icon> 
+          Entrada: {{ f.FechaHoraEntrada | date:'dd/MM/yy HH:mm' }}
+        </p>
+        <p *ngIf="f.FechaHoraSalida">
+          Salida: {{ f.FechaHoraSalida | date:'dd/MM/yy HH:mm' }}
+        </p>
+        <p *ngIf="!f.FechaHoraSalida" style="color: var(--ion-color-danger);">
+          Activo (Sin salida)
+        </p>
+      </ion-label>
+
+      <ion-button slot="end" fill="clear" (click)="abrirMapa(f.GeolocalizacionLatitud, f.GeolocalizacionLongitud)">
+        <ion-icon slot="icon-only" name="map-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="fichajes.length === 0" class="ion-text-center ion-padding">
+    <p>No se encontraron fichajes con estos criterios.</p>
+  </div>
+
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime id="fechaInicio" presentation="date" [(ngModel)]="filtroFechaInicio"></ion-datetime>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime id="fechaFin" presentation="date" [(ngModel)]="filtroFechaFin"></ion-datetime>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="isMapModalOpen" (didDismiss)="cerrarMapa()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Ubicación</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarMapa()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div id="mapa-admin" style="height: 100%; width: 100%;"></div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

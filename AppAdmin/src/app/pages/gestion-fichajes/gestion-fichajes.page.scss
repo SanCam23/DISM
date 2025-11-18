@@ -1,0 +1,15 @@
+.filtros-container {
+  padding: 10px;
+}
+
+.fecha-label {
+  text-align: center;
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Asegura que los botones de fecha se centren */
+ion-datetime-button {
+  margin: 0 auto;
+}
