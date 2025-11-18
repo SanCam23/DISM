@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gestión Trabajos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="abrirModalCrear()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-list>
+    <ion-item *ngFor="let t of trabajos">
+      <ion-icon slot="start" name="briefcase-outline" color="medium"></ion-icon>
+      <ion-label>
+        <h2>{{ t.Nombre }}</h2>
+        <p>ID: {{ t.IdTrabajo }}</p>
+      </ion-label>
+      
+      <ion-buttons slot="end">
+        <ion-button color="warning" (click)="abrirModalEditar(t)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="borrarTrabajo(t.IdTrabajo!)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="trabajos.length === 0" class="ion-text-center ion-padding">
+    <p>No hay trabajos registrados.</p>
+  </div>
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="cerrarModal()" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="secondary">
+          <ion-title>{{ esEdicion ? 'Editar' : 'Nuevo' }} Trabajo</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarModal()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <ion-item class="ion-margin-bottom">
+          <ion-label position="stacked">Nombre del Trabajo</ion-label>
+          <ion-input [(ngModel)]="trabajoActual.Nombre" placeholder="Ej: Mantenimiento"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" (click)="guardarTrabajo()" class="ion-margin-top">
+          <ion-icon slot="start" name="save-outline"></ion-icon>
+          Guardar
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>
