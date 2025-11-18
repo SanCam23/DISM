@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Admin Panel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <div class="ion-text-center">
+    <h1>Bienvenido Administrador</h1>
+    <p>Selecciona una opción:</p>
+  </div>
+
+  <ion-button expand="block" routerLink="/gestion-usuarios" class="ion-margin-bottom">
+    Gestión Usuarios
+  </ion-button>
+
+  <ion-button expand="block" color="secondary" class="ion-margin-bottom">
+    Gestión Trabajos (Pendiente)
+  </ion-button>
+
+  <ion-button expand="block" color="tertiary">
+    Gestión Fichajes (Pendiente)
+  </ion-button>
+
+</ion-content>
