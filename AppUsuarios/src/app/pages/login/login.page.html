@@ -1,0 +1,16 @@
+<ion-content class="ion-padding ion-text-center">
+  <div style="margin-top: 30%;">
+    <h1>Bienvenido a DISM</h1>
+    <ion-item>
+      <ion-label position="stacked">Usuario</ion-label>
+      <ion-input [(ngModel)]="credenciales.Usuario" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-input [(ngModel)]="credenciales.Clave" type="password"></ion-input>
+    </ion-item>
+    <ion-button expand="block" class="ion-margin-top" (click)="iniciarSesion()">
+      Entrar
+    </ion-button>
+  </div>
+</ion-content>

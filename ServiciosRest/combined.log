@@ -65,3 +65,5 @@
 {"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-18T10:05:15.736Z"}
 {"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-18T10:18:16.752Z"}
 {"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-18T10:24:04.399Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-24T15:18:25.709Z"}
+{"level":"info","message":"Servicios REST DISM en ejecución correctamente","service":"servicios-rest-dism","swagger":"http://localhost:8080/api-docs/","timestamp":"2025-11-24T19:25:04.447Z"}

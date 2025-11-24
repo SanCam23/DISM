@@ -110,11 +110,25 @@ const verifyApiKey = async (req, res) => {
   });
 };
 
+// Verifica si una key existe en BD y devuelve true/false
+const isApiKeyValid = (key) => {
+  return new Promise((resolve) => {
+    connection.query('SELECT * FROM ApiKey WHERE `Key` = ?', [key], (err, results) => {
+      if (err || results.length === 0) {
+        resolve(false);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+};
+
 module.exports = {
   getApiKeys,
   createApiKey,
   getApiKeyById,
   updateApiKey,
   deleteApiKey,
-  verifyApiKey
+  verifyApiKey,
+  isApiKeyValid
 };
