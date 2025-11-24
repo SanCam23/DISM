@@ -168,31 +168,50 @@ const getFichajeActual = async (req, res) => {
   });
 };
 
-const cerrarFichajesAntiguosManual = async (req, res) => {
-  console.log("POST /fichajes/cerrar-antiguos llamado");
+const procesarCierreAutomatico = () => {
+  return new Promise((resolve, reject) => {
+    const query = `
+      UPDATE fichajes 
+      SET
+        FechaHoraSalida = DATE_ADD(FechaHoraEntrada, INTERVAL 12 HOUR),
+        HorasTrabajadas = 12
+      WHERE
+        FechaHoraSalida IS NULL
+        AND TIMESTAMPDIFF(HOUR, FechaHoraEntrada, NOW()) >= 12;
+    `;
 
-  const query = `
-    UPDATE Fichajes
-    SET
-      FechaHoraSalida = DATE_ADD(FechaHoraEntrada, INTERVAL 12 HOUR),
-      HorasTrabajadas = 12
-    WHERE
-      FechaHoraSalida IS NULL
-      AND TIMESTAMPDIFF(HOUR, FechaHoraEntrada, NOW()) >= 12;
-  `;
-
-  connection.query(query, (err, results) => {
-    if (err) {
-      console.error("Error al cerrar fichajes manualmente:", err.message);
-      res.status(500).json({ error: err.message });
-    } else {
-      res.status(200).json({
-        message: 'Proceso de cierre finalizado.',
-        fichajesCerrados: results.affectedRows
-      });
-    }
+    connection.query(query, (err, results) => {
+      if (err) {
+        console.error("Error interno al cerrar fichajes:", err.message);
+        reject(err);
+      } else {
+        if (results.affectedRows > 0) {
+            console.log(`[AUTO] Se han cerrado automáticamente ${results.affectedRows} fichajes vencidos.`);
+        } else {
+            console.log(`[AUTO] No se encontraron fichajes vencidos para cerrar.`);
+        }
+        resolve(results);
+      }
+    });
   });
 };
+
+// --- MODIFICACIÓN DEL CONTROLLER MANUAL ---
+// Ahora este endpoint simplemente llama a la función de arriba.
+const cerrarFichajesAntiguosManual = async (req, res) => {
+  console.log("POST /fichajes/cerrar-antiguos llamado");
+  
+  try {
+    const results = await procesarCierreAutomatico();
+    res.status(200).json({
+      message: 'Proceso de cierre finalizado.',
+      fichajesCerrados: results.affectedRows
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 
 
 module.exports = {
@@ -201,7 +220,8 @@ module.exports = {
   createFichaje,
   finalizarFichaje,
   getFichajeActual,
-  cerrarFichajesAntiguosManual
+  cerrarFichajesAntiguosManual,
+  procesarCierreAutomatico
 };
 
 

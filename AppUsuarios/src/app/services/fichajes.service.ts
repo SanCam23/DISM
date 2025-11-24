@@ -34,7 +34,4 @@ export class FichajesService {
     return this.http.get(`${this.apiUrl}/fichajes/usuario`, { params });
   }
 
-  cerrarFichajesAntiguosManual(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/fichajes/cerrar-antiguos`, {});
-  }
 }
