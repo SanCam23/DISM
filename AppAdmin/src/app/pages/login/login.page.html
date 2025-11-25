@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true" class="login-content">
+  <div class="background-overlay">
+    <ion-grid class="ion-no-padding login-grid">
+      <ion-row class="ion-justify-content-center ion-align-items-center" style="height: 100%;">
+        <ion-col size-md="6" size-lg="5" size-xs="10">
+
+          <ion-card class="login-card">
+            <ion-card-header class="ion-text-center">
+              <ion-icon name="person-circle-outline" class="header-icon"></ion-icon> <ion-card-title>Bienvenido a
+                DISM</ion-card-title>
+              <ion-card-subtitle>Inicia sesión para continuar</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item class="ion-margin-bottom input-item">
+                <ion-label position="stacked">Usuario</ion-label>
+                <ion-input [(ngModel)]="credenciales.Usuario" type="text" placeholder="Ej: jperez"></ion-input>
+                <ion-icon name="person-outline" slot="start"></ion-icon>
+              </ion-item>
+
+              <ion-item class="ion-margin-bottom input-item">
+                <ion-label position="stacked">Contraseña</ion-label>
+                <ion-input [(ngModel)]="credenciales.Clave" type="password" placeholder="********"></ion-input>
+                <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+              </ion-item>
+
+              <ion-button expand="block" shape="round" class="ion-margin-top login-btn" (click)="iniciarSesion()">
+                Entrar
+                <ion-icon slot="end" name="log-in-outline"></ion-icon>
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

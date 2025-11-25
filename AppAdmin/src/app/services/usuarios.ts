@@ -9,14 +9,19 @@ export interface Usuario {
   Clave: string;
 }
 
+export interface LoginResponse {
+  usuario: Usuario; // Ahora sí reconocerá "Usuario"
+  message: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
   // Ajusta el puerto si tu servidor corre en otro (ej: 8080)
-  private apiUrl = 'http://localhost:8080/usuarios'; 
+  private apiUrl = 'http://localhost:8080/usuarios';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // 1. Obtener todos (GET)
   getUsuarios(): Observable<Usuario[]> {
@@ -41,5 +46,9 @@ export class UsuariosService {
   // 5. Borrar (DELETE)
   deleteUsuario(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  login(usuario: string, clave: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { Usuario: usuario, Clave: clave });
   }
 }

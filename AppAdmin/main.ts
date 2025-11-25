@@ -5,18 +5,16 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
-// --- CORRECCIÓN 1: Añadir 'withInterceptors' a los imports ---
-import { provideHttpClient, withInterceptors } from '@angular/common/http'; 
-
-// --- CORRECCIÓN 2: Ruta más limpia (asumiendo que estás en src/main.ts) ---
-import { apiKeyInterceptor } from './app/interceptors/apikey.interceptor'; 
+// --- NUEVOS IMPORTS ---
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { apiKeyInterceptor } from './app/interceptors/apikey.interceptor'; // <--- RUTA CORRECTA
 
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    // Ahora 'withInterceptors' ya estará definido y no dará error
-    provideHttpClient(withInterceptors([apiKeyInterceptor])),
+    // Asegúrate de que el interceptor está AQUÍ
+    provideHttpClient(withInterceptors([apiKeyInterceptor])), // <--- ¡CLAVE!
     provideRouter(routes, withPreloading(PreloadAllModules)),
   ],
 });
