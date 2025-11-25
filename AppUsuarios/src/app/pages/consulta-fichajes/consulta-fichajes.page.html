@@ -6,14 +6,9 @@
 
 <ion-content class="ion-padding">
 
-  <!-- Selección de usuario -->
+  <!-- Mostrar usuario logueado -->
   <ion-item>
-    <ion-label>Usuario</ion-label>
-    <ion-select placeholder="Selecciona usuario" [(ngModel)]="usuarioSeleccionado">
-      <ion-select-option *ngFor="let u of usuarios" [value]="u.IdUsuario">
-        {{ u.Nombre }}
-      </ion-select-option>
-    </ion-select>
+    <ion-label><strong>Usuario:</strong> {{ usuarioLogueado?.Nombre || 'No identificado' }}</ion-label>
   </ion-item>
 
   <!-- Selección de fecha -->

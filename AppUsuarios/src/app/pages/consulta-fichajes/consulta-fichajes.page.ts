@@ -22,8 +22,7 @@ import { UsuariosService } from '../../services/usuarios.service';
   ],
 })
 export class ConsultaFichajesPage {
-  usuarios: any[] = [];
-  usuarioSeleccionado?: number;
+  usuarioLogueado: any = null;
   fechaInicio?: string;
   fichajes: any[] = [];
   consultaRealizada = false;
@@ -34,25 +33,27 @@ export class ConsultaFichajesPage {
   ) {}
 
   ionViewWillEnter() {
-    this.cargarUsuarios();
+    this.obtenerUsuarioLogueado();
   }
 
-  cargarUsuarios() {
-    this.usuariosService.getUsuarios().subscribe({
-      next: res => this.usuarios = res,
-      error: err => console.error('Error cargando usuarios', err)
-    });
+  obtenerUsuarioLogueado() {
+    const usuarioGuardado = localStorage.getItem('usuarioLogueado');
+    if (usuarioGuardado) {
+      this.usuarioLogueado = JSON.parse(usuarioGuardado);
+    } else {
+      alert('No hay usuario logueado. Por favor, inicia sesión.');
+    }
   }
 
   consultarFichajes() {
-    if (!this.usuarioSeleccionado || !this.fechaInicio) {
-      alert('Debe seleccionar usuario y una fecha.');
+    if (!this.usuarioLogueado || !this.fechaInicio) {
+      alert('Debe seleccionar una fecha.');
       return;
     }
 
     const fechaFormateada = this.fechaInicio.split('T')[0];
 
-    this.fichajesService.getFichajesByUsuario(this.usuarioSeleccionado, fechaFormateada)
+    this.fichajesService.getFichajesByUsuario(this.usuarioLogueado.IdUsuario, fechaFormateada)
       .subscribe({
         next: res => {
           this.fichajes = res;

@@ -33,9 +33,8 @@ export class RegistrarFichajePage {
   longitud?: number;
   direccionGeorreferenciada?: string;
   trabajos: any[] = [];
-  usuarios: any[] = [];
   trabajoSeleccionado?: number;
-  usuarioSeleccionado?: number;
+  usuarioLogueado: any = null;
   fichajeActivo: any = null;
   map?: Leaflet.Map;
 
@@ -48,15 +47,18 @@ export class RegistrarFichajePage {
   ) {}
 
   async ionViewWillEnter() {
-    this.obtenerUsuarios();
+    this.obtenerUsuarioLogueado();
     this.obtenerTrabajos();
   }
 
-  obtenerUsuarios() {
-    this.usuariosService.getUsuarios().subscribe({
-      next: res => this.usuarios = res,
-      error: err => console.error('Error cargando usuarios', err)
-    });
+  obtenerUsuarioLogueado() {
+    const usuarioGuardado = localStorage.getItem('usuarioLogueado');
+    if (usuarioGuardado) {
+      this.usuarioLogueado = JSON.parse(usuarioGuardado);
+      this.comprobarFichaje();
+    } else {
+      alert('No hay usuario logueado. Por favor, inicia sesión.');
+    }
   }
 
   obtenerTrabajos() {
@@ -67,8 +69,8 @@ export class RegistrarFichajePage {
   }
 
   comprobarFichaje() {
-    if (!this.usuarioSeleccionado) return;
-    this.fichajesService.getFichajeActual(this.usuarioSeleccionado).subscribe({
+    if (!this.usuarioLogueado) return;
+    this.fichajesService.getFichajeActual(this.usuarioLogueado.IdUsuario).subscribe({
       next: data => this.fichajeActivo = data,
       error: () => this.fichajeActivo = null
     });
@@ -123,13 +125,13 @@ export class RegistrarFichajePage {
   }
 
   registrarEntrada() {
-    if (!this.usuarioSeleccionado || !this.trabajoSeleccionado || !this.latitud || !this.longitud) {
-      alert('Selecciona usuario, trabajo y asegúrate de tener geolocalización.');
+    if (!this.usuarioLogueado || !this.trabajoSeleccionado || !this.latitud || !this.longitud) {
+      alert('Selecciona trabajo y asegúrate de tener geolocalización.');
       return;
     }
 
     const data = {
-      IdUsuario: this.usuarioSeleccionado,
+      IdUsuario: this.usuarioLogueado.IdUsuario,
       IdTrabajo: this.trabajoSeleccionado,
       GeolocalizacionLatitud: this.latitud,
       GeolocalizacionLongitud: this.longitud,

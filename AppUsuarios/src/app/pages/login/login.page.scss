@@ -1,0 +1,93 @@
+/* =========================================
+   ESTILOS BASE (Modo Claro / Default)
+   ========================================= */
+
+.login-content {
+  --background: #f4f5f8;
+  /* Imagen de fondo sutil o degradado opcional para darle textura */
+  --background: linear-gradient(135deg, #f4f5f8 0%, #e0e5ec 100%);
+}
+
+.login-grid {
+  height: 100vh;
+}
+
+.login-card {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 20px 10px;
+  background: white; /* Fondo blanco por defecto */
+}
+
+.input-item {
+  --background: #f9f9f9; /* Gris muy clarito para los inputs */
+  border-radius: 8px;
+  margin-top: 15px;
+  --padding-start: 10px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06); /* Pequeña profundidad */
+}
+
+.login-btn {
+  margin-top: 30px;
+  --box-shadow: 0 4px 10px rgba(var(--ion-color-primary-rgb), 0.3);
+  font-weight: bold;
+  height: 50px; /* Un poco más alto para ser más fácil de pulsar */
+  font-size: 1.1em;
+}
+
+/* Icono grande del encabezado */
+.header-icon {
+  font-size: 80px;
+  color: var(--ion-color-primary);
+  margin-bottom: 10px;
+}
+
+/* =========================================
+   MODO OSCURO (Windows / Android / iOS)
+   ========================================= */
+
+@media (prefers-color-scheme: dark) {
+  
+  .login-content {
+    /* Fondo principal oscuro (casi negro) */
+    --background: #000000; 
+    --background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+  }
+
+  .login-card {
+    /* La tarjeta ahora es gris oscuro */
+    background: #1e1e1e;
+    /* La sombra se hace más sutil o oscura para que se note la elevación */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Textos de la tarjeta */
+  ion-card-title {
+    color: #ffffff !important;
+  }
+
+  ion-card-subtitle {
+    color: #a0a0a0 !important;
+  }
+
+  .input-item {
+    /* El input debe ser un poco más claro o diferente que la tarjeta */
+    --background: #2c2c2c; 
+    --color: #ffffff; /* Texto que escribes en blanco */
+    
+    /* Iconos dentro del input (candado/persona) */
+    ion-icon {
+      color: #bbbbbb;
+    }
+  }
+
+  /* Etiquetas flotantes (Label) */
+  ion-item ion-label {
+    color: #cccccc !important;
+  }
+
+  /* Ajuste del icono principal si quieres que brille más */
+  .header-icon {
+    filter: brightness(1.2);
+  }
+}
