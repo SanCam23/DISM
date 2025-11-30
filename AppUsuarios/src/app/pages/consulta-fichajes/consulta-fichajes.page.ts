@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonItem,
-  IonLabel, IonSelect, IonSelectOption, IonCard, IonCardHeader,
+  IonLabel, IonCard, IonCardHeader,
   IonCardTitle, IonCardContent, IonDatetime, IonText
 } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,7 @@ import { UsuariosService } from '../../services/usuarios.service';
   imports: [
     CommonModule, FormsModule,
     IonHeader, IonToolbar, IonTitle, IonContent, IonButton,
-    IonItem, IonLabel, IonSelect, IonSelectOption, IonCard,
+    IonItem, IonLabel, IonCard,
     IonCardHeader, IonCardTitle, IonCardContent, IonDatetime, IonText
   ],
 })

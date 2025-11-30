@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
-  IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, 
+  IonContent, IonCard, IonCardHeader, 
   IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonLabel, 
   IonInput, IonButton, IonIcon, IonGrid, IonRow, IonCol, AlertController 
 } from '@ionic/angular/standalone';
@@ -18,7 +18,7 @@ import { personCircleOutline, personOutline, lockClosedOutline, logInOutline } f
   standalone: true,
   imports: [
     CommonModule, FormsModule,
-    IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, 
+    IonContent, IonCard, IonCardHeader, 
     IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonLabel, 
     IonInput, IonButton, IonIcon, IonGrid, IonRow, IonCol
   ]

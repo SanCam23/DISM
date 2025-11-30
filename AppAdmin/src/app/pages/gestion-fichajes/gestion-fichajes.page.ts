@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
-  IonList, IonItem, IonLabel, IonNote, IonIcon, IonButton, IonGrid, IonRow, IonCol,
-  IonSelect, IonSelectOption, IonDatetimeButton, IonModal, IonDatetime, IonPopover, AlertController
+  IonList, IonItem, IonLabel, IonIcon, IonButton, IonGrid, IonRow, IonCol,
+  IonSelect, IonSelectOption, IonModal, IonDatetime, IonPopover, AlertController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { mapOutline, searchOutline, closeOutline, timeOutline } from 'ionicons/icons';
@@ -20,8 +20,8 @@ import * as L from 'leaflet';
   imports: [
     CommonModule, FormsModule,
     IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
-    IonList, IonItem, IonLabel, IonNote, IonIcon, IonButton, IonGrid, IonRow, IonCol,
-    IonSelect, IonSelectOption, IonDatetimeButton, IonModal, IonDatetime, IonPopover
+    IonList, IonItem, IonLabel, IonIcon, IonButton, IonGrid, IonRow, IonCol,
+    IonSelect, IonSelectOption, IonModal, IonDatetime, IonPopover
   ]
 })
 export class GestionFichajesPage implements OnInit {

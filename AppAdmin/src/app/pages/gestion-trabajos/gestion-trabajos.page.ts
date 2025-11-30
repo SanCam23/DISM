@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { 
   IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, 
   IonLabel, IonButton, IonIcon, IonButtons, IonBackButton,
-  IonModal, IonInput, IonFooter 
+  IonModal, IonInput 
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons'; 
 import { trashOutline, createOutline, add, closeOutline, saveOutline, briefcaseOutline } from 'ionicons/icons';
@@ -18,7 +18,7 @@ import { TrabajosService, Trabajo } from '../../services/trabajos';
   imports: [
     IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
     IonList, IonItem, IonLabel, IonButton, IonIcon, IonButtons, IonBackButton,
-    IonModal, IonInput, IonFooter
+    IonModal, IonInput
   ]
 })
 export class GestionTrabajosPage implements OnInit {
