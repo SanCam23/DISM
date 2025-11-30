@@ -26,7 +26,6 @@ export class GestionTrabajosPage implements OnInit {
   isModalOpen = false;
   trabajos: Trabajo[] = [];
   
-  // Objeto temporal para el formulario
   trabajoActual: Trabajo = { Nombre: '' };
   esEdicion = false;
 
@@ -47,16 +46,17 @@ export class GestionTrabajosPage implements OnInit {
     });
   }
 
-  // --- MODAL ---
+  // Abrir modal para crear nuevo trabajo
   abrirModalCrear() {
     this.esEdicion = false;
     this.trabajoActual = { Nombre: '' };
     this.isModalOpen = true;
   }
 
+  // Abrir modal para editar trabajo existente
   abrirModalEditar(t: Trabajo) {
     this.esEdicion = true;
-    this.trabajoActual = { ...t }; // Copia para no modificar la lista directamente
+    this.trabajoActual = { ...t };
     this.isModalOpen = true;
   }
 
@@ -64,9 +64,9 @@ export class GestionTrabajosPage implements OnInit {
     this.isModalOpen = false;
   }
 
-  // --- CRUD ---
+  // Guardar trabajo (crear o actualizar según contexto)
   guardarTrabajo() {
-    if (!this.trabajoActual.Nombre.trim()) return; // Validación básica
+    if (!this.trabajoActual.Nombre.trim()) return;
 
     if (this.esEdicion) {
       this.trabajosService.updateTrabajo(this.trabajoActual.IdTrabajo!, this.trabajoActual).subscribe({

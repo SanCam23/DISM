@@ -8,6 +8,7 @@ export class TrabajosService {
 
   constructor(private http: HttpClient) {}
 
+  // Obtener listado completo de trabajos
   getTrabajos(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/trabajos`);
   }

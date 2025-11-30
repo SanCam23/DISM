@@ -1,7 +1,7 @@
 const config = require('./config');
 const logger = require('./logger');
 const ExpressServer = require('./expressServer');
-const FichajesService = require('./services/FichajesService'); // <--- 1. ¡IMPORTANTE! AÑADIR ESTA LÍNEA
+const FichajesService = require('./services/FichajesService');
 
 const launchServer = async () => {
   try {
@@ -18,15 +18,15 @@ const launchServer = async () => {
       swagger: `http://localhost:${config.URL_PORT}/api-docs/`
     });
 
-    // Verificación automática al inicio
+    // Procesar cierre automático de fichajes abiertos de más de 12 horas
     console.log('Verificando fichajes abiertos de más de 12 horas...');
     await FichajesService.procesarCierreAutomatico();
 
   } catch (error) {
-    console.error(error); // <--- Añadido para ver el error real en consola
+    console.error(error);
     logger.error('Error al iniciar los Servicios REST', error.message);
     
-    // Corrección del cierre: verificamos si existe el servidor antes de cerrar
+    // Verificar existencia del servidor antes de cerrarlo
     if (this.expressServer) {
         await this.expressServer.close();
     }

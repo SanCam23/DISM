@@ -8,18 +8,22 @@ export class FichajesService {
 
   constructor(private http: HttpClient) { }
 
+  // Obtener fichaje activo del usuario
   getFichajeActual(usuarioId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/fichajes/actual/${usuarioId}`);
   }
 
+  // Registrar nuevo fichaje de entrada
   createFichaje(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/fichajes`, data);
   }
 
+  // Finalizar fichaje activo
   finalizarFichaje(idFichaje: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/fichajes/${idFichaje}/finalizar`, {});
   }
 
+  // Obtener fichajes filtrados por usuario y fechas
   getFichajesByUsuario(usuarioId: number, fechaInicio?: string, fechaFin?: string): Observable<any> {
     let params: any = { usuarioId };
 

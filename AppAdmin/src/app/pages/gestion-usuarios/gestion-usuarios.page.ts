@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { 
   IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, 
   IonLabel, IonButton, IonIcon, IonButtons, IonBackButton,
-  IonModal, IonInput, IonFooter // <--- Importamos componentes del Modal
+  IonModal, IonInput, IonFooter
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons'; 
 import { trashOutline, createOutline, add, closeOutline, saveOutline } from 'ionicons/icons';
@@ -23,12 +23,10 @@ import { UsuariosService, Usuario } from '../../services/usuarios';
 })
 export class GestionUsuariosPage implements OnInit {
   
-  // Variable para controlar el modal
   isModalOpen = false;
 
   usuarios: Usuario[] = [];
 
-  // Objeto para el formulario (lo usaremos para crear y editar)
   usuarioActual: Usuario = {
     Nombre: '',
     Usuario: '',
@@ -54,19 +52,17 @@ export class GestionUsuariosPage implements OnInit {
     });
   }
 
-  // --- LÓGICA DEL MODAL ---
-
-  // Abrir para CREAR
+  // Abrir modal para crear nuevo usuario
   abrirModalCrear() {
     this.esEdicion = false;
-    this.usuarioActual = { Nombre: '', Usuario: '', Clave: '' }; // Limpiar formulario
+    this.usuarioActual = { Nombre: '', Usuario: '', Clave: '' };
     this.isModalOpen = true;
   }
 
-  // Abrir para EDITAR
+  // Abrir modal para editar usuario existente
   abrirModalEditar(u: Usuario) {
     this.esEdicion = true;
-    this.usuarioActual = { ...u }; // Copiamos los datos para no editarlos en la lista directamente
+    this.usuarioActual = { ...u };
     this.isModalOpen = true;
   }
 
@@ -74,19 +70,19 @@ export class GestionUsuariosPage implements OnInit {
     this.isModalOpen = false;
   }
 
-  // --- LÓGICA DE GUARDADO (Unificada) ---
+  // Guardar usuario (crear o actualizar según contexto)
   guardarUsuario() {
     if (this.esEdicion) {
-      // EDITAR
+      // Actualizar usuario existente
       this.usuariosService.updateUsuario(this.usuarioActual.IdUsuario!, this.usuarioActual).subscribe({
         next: () => {
           this.cerrarModal();
-          this.cargarUsuarios(); // Refrescar la lista
+          this.cargarUsuarios();
         },
         error: (e) => console.error(e)
       });
     } else {
-      // CREAR
+      // Crear nuevo usuario
       this.usuariosService.createUsuario(this.usuarioActual).subscribe({
         next: () => {
           this.cerrarModal();

@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 
-// Obtener todos los usuarios
+// Obtener listado completo de usuarios
 const getUsuarios = async (req, res) => {
   console.log("GET /usuarios llamado");
 
@@ -14,7 +14,7 @@ const getUsuarios = async (req, res) => {
   });
 };
 
-// Crear un nuevo usuario
+// Registrar nuevo usuario en el sistema
 const createUsuario = async (req, res) => {
   const { Nombre, Usuario, Clave } = req.body;
   console.log("POST /usuarios llamado con:", req.body);
@@ -36,7 +36,7 @@ const createUsuario = async (req, res) => {
   );
 };
 
-// Obtener usuario por ID
+// Obtener información de usuario específico
 const getUsuarioById = async (req, res) => {
   const { id } = req.params;
   console.log(`GET /usuarios/${id} llamado`);
@@ -53,7 +53,7 @@ const getUsuarioById = async (req, res) => {
   });
 };
 
-// Actualizar usuario
+// Actualizar datos de usuario existente
 const updateUsuario = async (req, res) => {
   const { id } = req.params;
   const { Nombre, Usuario, Clave } = req.body;
@@ -73,7 +73,7 @@ const updateUsuario = async (req, res) => {
   );
 };
 
-// Eliminar usuario
+// Eliminar usuario del sistema
 const deleteUsuario = async (req, res) => {
   const { id } = req.params;
   console.log(`DELETE /usuarios/${id} llamado`);
@@ -88,7 +88,7 @@ const deleteUsuario = async (req, res) => {
   });
 };
 
-// Validar login de usuario
+// Validar credenciales de acceso
 const loginUsuario = async (req, res) => {
   const { Usuario, Clave } = req.body;
   console.log("POST /usuarios/login llamado con:", req.body);

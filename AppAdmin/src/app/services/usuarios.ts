@@ -10,7 +10,7 @@ export interface Usuario {
 }
 
 export interface LoginResponse {
-  usuario: Usuario; // Ahora sí reconocerá "Usuario"
+  usuario: Usuario;
   message: string;
 }
 
@@ -18,36 +18,36 @@ export interface LoginResponse {
   providedIn: 'root'
 })
 export class UsuariosService {
-  // Ajusta el puerto si tu servidor corre en otro (ej: 8080)
   private apiUrl = 'http://localhost:8080/usuarios';
 
   constructor(private http: HttpClient) { }
 
-  // 1. Obtener todos (GET)
+  // Obtener listado completo de usuarios
   getUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.apiUrl);
   }
 
-  // 2. Obtener uno por ID (GET)
+  // Obtener usuario por identificador
   getUsuario(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
   }
 
-  // 3. Crear nuevo (POST)
+  // Crear nuevo usuario
   createUsuario(usuario: Usuario): Observable<any> {
     return this.http.post(this.apiUrl, usuario);
   }
 
-  // 4. Actualizar existente (PUT)
+  // Actualizar usuario existente
   updateUsuario(id: number, usuario: Usuario): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, usuario);
   }
 
-  // 5. Borrar (DELETE)
+  // Eliminar usuario
   deleteUsuario(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
+  // Autenticar usuario
   login(usuario: string, clave: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { Usuario: usuario, Clave: clave });
   }

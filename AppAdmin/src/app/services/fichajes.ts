@@ -10,7 +10,6 @@ export interface Fichaje {
   TrabajoNombre?: string;
   GeolocalizacionLatitud?: number;
   GeolocalizacionLongitud?: number;
-  // Añade otros campos si los necesitas
 }
 
 @Injectable({
@@ -21,13 +20,12 @@ export class FichajesService {
 
   constructor(private http: HttpClient) {}
 
-  // 1. Obtener TODOS los fichajes (sin filtros)
+  // Obtener todos los fichajes sin filtros
   getFichajes(): Observable<Fichaje[]> {
     return this.http.get<Fichaje[]>(this.apiUrl);
   }
 
-  // 2. Filtrar por Usuario y Fechas
-  // Backend espera: /fichajes/usuario?usuarioId=X&fechaInicio=Y&fechaFin=Z
+  // Obtener fichajes filtrados por usuario y rango de fechas
   getFichajesFiltrados(usuarioId: number, fechaInicio?: string, fechaFin?: string): Observable<Fichaje[]> {
     let params = new HttpParams().set('usuarioId', usuarioId);
     

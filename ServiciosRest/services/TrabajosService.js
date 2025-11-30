@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 
-// Obtener todos los trabajos
+// Obtener listado completo de trabajos
 const getTrabajos = async (req, res) => {
   console.log("GET /trabajos llamado");
 
@@ -14,7 +14,7 @@ const getTrabajos = async (req, res) => {
   });
 };
 
-// Crear un nuevo trabajo
+// Registrar nuevo trabajo en el sistema
 const createTrabajo = async (req, res) => {
   const { Nombre } = req.body;
   console.log("POST /trabajos llamado con:", req.body);
@@ -36,7 +36,7 @@ const createTrabajo = async (req, res) => {
   );
 };
 
-// Obtener trabajo por ID
+// Obtener información de trabajo específico
 const getTrabajoById = async (req, res) => {
   const { id } = req.params;
   console.log(`GET /trabajos/${id} llamado`);
@@ -53,6 +53,7 @@ const getTrabajoById = async (req, res) => {
   });
 };
 
+// Actualizar datos de trabajo existente
 const updateTrabajo = async (req, res) => {
   const { id } = req.params;
   const { Nombre } = req.body;
@@ -77,7 +78,7 @@ const updateTrabajo = async (req, res) => {
 };
 
 
-// Eliminar trabajo
+// Eliminar trabajo del sistema
 const deleteTrabajo = async (req, res) => {
   const { id } = req.params;
   console.log(`DELETE /trabajos/${id} llamado`);

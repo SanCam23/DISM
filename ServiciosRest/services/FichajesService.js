@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 
-// Obtener todos los fichajes
+// Obtener todos los fichajes con información de usuarios y trabajos
 const getFichajes = async (req, res) => {
   console.log("GET /fichajes llamado");
 
@@ -21,7 +21,7 @@ const getFichajes = async (req, res) => {
   });
 };
 
-// Obtener fichajes por usuario y fecha (solo inicio opcional)
+// Obtener fichajes filtrados por usuario y rango de fechas opcional
 const getFichajesByUsuario = async (req, res) => {
   const { usuarioId, fechaInicio, fechaFin } = req.query;
   console.log(`GET /fichajes/usuario llamado con:`, req.query);
@@ -59,12 +59,12 @@ const getFichajesByUsuario = async (req, res) => {
 };
 
 
-// Crear un nuevo fichaje (entrada)
+// Registrar nuevo fichaje de entrada con validación de duplicados
 const createFichaje = async (req, res) => {
   const { IdUsuario, IdTrabajo, GeolocalizacionLatitud, GeolocalizacionLongitud } = req.body;
   console.log("POST /fichajes llamado con:", req.body);
 
-  // Verificar si ya existe un fichaje abierto en las últimas 12 horas
+  // Verificar existencia de fichaje abierto en las últimas 12 horas
   const checkQuery = `
     SELECT * FROM Fichajes 
     WHERE IdUsuario = ? AND FechaHoraSalida IS NULL 
@@ -78,7 +78,7 @@ const createFichaje = async (req, res) => {
     } else if (results.length > 0) {
       res.status(400).json({ error: 'Ya existe un fichaje abierto en las últimas 12 horas' });
     } else {
-      // Crear nuevo fichaje
+      // Insertar nuevo fichaje de entrada
       connection.query(
         'INSERT INTO Fichajes (IdUsuario, IdTrabajo, FechaHoraEntrada, GeolocalizacionLatitud, GeolocalizacionLongitud) VALUES (?, ?, NOW(), ?, ?)',
         [IdUsuario, IdTrabajo, GeolocalizacionLatitud, GeolocalizacionLongitud],
@@ -98,12 +98,12 @@ const createFichaje = async (req, res) => {
   });
 };
 
-// Finalizar fichaje (salida)
+// Registrar salida y calcular horas trabajadas
 const finalizarFichaje = async (req, res) => {
   const { id } = req.params;
   console.log(`PUT /fichajes/${id}/finalizar llamado`);
 
-  // Obtener el fichaje actual
+  // Obtener fichaje para validación
   connection.query('SELECT * FROM Fichajes WHERE IdFichaje = ?', [id], (err, results) => {
     if (err) {
       console.error("Error en la consulta:", err);
@@ -141,7 +141,7 @@ const finalizarFichaje = async (req, res) => {
   });
 };
 
-// Obtener fichaje actual del usuario (últimas 12 horas)
+// Obtener fichaje activo de un usuario en las últimas 12 horas
 const getFichajeActual = async (req, res) => {
   const { usuarioId } = req.params;
   console.log(`GET /fichajes/actual/${usuarioId} llamado`);
@@ -168,6 +168,7 @@ const getFichajeActual = async (req, res) => {
   });
 };
 
+// Cerrar automáticamente fichajes abiertos de más de 12 horas
 const procesarCierreAutomatico = () => {
   return new Promise((resolve, reject) => {
     const query = `
@@ -196,8 +197,7 @@ const procesarCierreAutomatico = () => {
   });
 };
 
-// --- MODIFICACIÓN DEL CONTROLLER MANUAL ---
-// Ahora este endpoint simplemente llama a la función de arriba.
+// Endpoint manual para ejecutar cierre de fichajes antiguos
 const cerrarFichajesAntiguosManual = async (req, res) => {
   console.log("POST /fichajes/cerrar-antiguos llamado");
   

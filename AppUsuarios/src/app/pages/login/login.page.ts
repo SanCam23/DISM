@@ -35,7 +35,7 @@ export class LoginPage {
     this.usuariosService.login(this.credenciales.Usuario, this.credenciales.Clave).subscribe({
       next: (res) => {
         console.log('Login correcto:', res);
-        // Guardar usuario en localStorage para saber quién es
+        // Almacenar información de sesión
         localStorage.setItem('usuarioLogueado', JSON.stringify(res.usuario));
         this.router.navigate(['/home']);
       },

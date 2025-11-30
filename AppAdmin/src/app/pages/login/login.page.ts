@@ -39,12 +39,12 @@ export class LoginPage {
     this.usuariosService.login(this.credenciales.Usuario, this.credenciales.Clave).subscribe({
       next: async (res) => {
         
-        // --- AQUÍ ESTÁ EL FILTRO DE SEGURIDAD ---
+        // Validar acceso exclusivo para administradores
         if (res.usuario.Usuario === 'Admin') {
           console.log('Acceso concedido a Admin');
-          this.router.navigate(['/home']); // Entramos a la gestión
+          this.router.navigate(['/home']);
         } else {
-          // Si el usuario existe en BD pero NO es Admin
+          // Denegar acceso a usuarios no administradores
           const alert = await this.alertCtrl.create({
             header: 'Acceso Denegado',
             message: 'Esta aplicación es exclusiva para administradores.',

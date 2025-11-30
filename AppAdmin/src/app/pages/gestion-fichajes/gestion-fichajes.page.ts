@@ -29,19 +29,17 @@ export class GestionFichajesPage implements OnInit {
   fichajes: Fichaje[] = [];
   usuarios: Usuario[] = [];
 
-  // Filtros
   filtroUsuario: number | null = null;
   filtroFechaInicio: string = '';
   filtroFechaFin: string = '';
 
-  // Mapa
   isMapModalOpen = false;
   map: L.Map | undefined;
 
   constructor(
     private fichajesService: FichajesService,
     private usuariosService: UsuariosService,
-    private alertCtrl: AlertController // 3. AQUÍ SÍ (Inyección)
+    private alertCtrl: AlertController
   ) {
     addIcons({ mapOutline, searchOutline, closeOutline, timeOutline });
   }
@@ -51,16 +49,16 @@ export class GestionFichajesPage implements OnInit {
   }
 
   cargarDatosIniciales() {
-    // 1. Cargar Usuarios para el Select
+    // Cargar listado de usuarios para selector
     this.usuariosService.getUsuarios().subscribe(res => this.usuarios = res);
 
-    // 2. Cargar todos los fichajes al principio
+    // Cargar fichajes iniciales sin filtros
     this.fichajesService.getFichajes().subscribe(res => this.fichajes = res);
   }
 
-  async buscar() { // <--- Nota: Ahora debe ser ASYNC para usar await con la alerta
+  async buscar() {
 
-    // 1. VALIDACIÓN: Si no hay usuario seleccionado, error y paramos.
+    // Validar selección de usuario antes de filtrar
     if (!this.filtroUsuario) {
       const alert = await this.alertCtrl.create({
         header: 'Atención',
@@ -69,25 +67,25 @@ export class GestionFichajesPage implements OnInit {
         buttons: ['Entendido']
       });
       await alert.present();
-      return; // <--- IMPORTANTE: Esto detiene la función aquí.
+      return;
     }
 
-    // 2. Preparación de fechas
+    // Preparar formato de fechas para consulta
     const inicio = this.filtroFechaInicio ? this.filtroFechaInicio.split('T')[0] : undefined;
     const fin = this.filtroFechaFin ? this.filtroFechaFin.split('T')[0] : undefined;
 
-    // 3. Ejecución de la búsqueda (Solo entramos aquí si pasó la validación)
+    // Ejecutar búsqueda con filtros aplicados
     this.fichajesService.getFichajesFiltrados(this.filtroUsuario, inicio, fin)
       .subscribe({
         next: (res) => this.fichajes = res,
         error: (err) => {
           console.error(err);
-          this.fichajes = []; // Limpiar lista si hay error
+          this.fichajes = [];
         }
       });
   }
 
-  // --- LÓGICA DEL MAPA ---
+  // Abrir modal de mapa con geolocalización del fichaje
   abrirMapa(lat?: number, lon?: number) {
     if (!lat || !lon) {
       alert('Este fichaje no tiene coordenadas registradas.');
@@ -95,7 +93,7 @@ export class GestionFichajesPage implements OnInit {
     }
     this.isMapModalOpen = true;
 
-    // Esperamos un poco a que el modal se abra para pintar el mapa
+    // Esperar renderizado del modal antes de inicializar mapa
     setTimeout(() => {
       this.iniciarMapa(lat, lon);
     }, 300);
@@ -104,7 +102,7 @@ export class GestionFichajesPage implements OnInit {
   cerrarMapa() {
     this.isMapModalOpen = false;
     if (this.map) {
-      this.map.remove(); // Limpiamos la instancia del mapa
+      this.map.remove();
       this.map = undefined;
     }
   }
@@ -113,8 +111,7 @@ export class GestionFichajesPage implements OnInit {
     const container = document.getElementById('mapa-admin');
     if (!container) return;
 
-    // --- CORRECCIÓN DE ICONOS LEAFLET ---
-    // Esto soluciona el problema del marcador invisible
+    // Configurar iconos predeterminados de Leaflet
     const iconDefault = L.icon({
       iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
       iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
@@ -125,9 +122,8 @@ export class GestionFichajesPage implements OnInit {
       shadowSize: [41, 41]
     });
     L.Marker.prototype.options.icon = iconDefault;
-    // ------------------------------------
 
-    // Si ya existe mapa, lo borramos para no duplicar
+    // Eliminar instancia previa si existe
     if (this.map) {
       this.map.remove();
     }

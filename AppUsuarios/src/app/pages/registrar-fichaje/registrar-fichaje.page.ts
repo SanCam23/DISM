@@ -97,6 +97,7 @@ export class RegistrarFichajePage {
       this.map = undefined;
     }
 
+    // Configurar iconos de marcadores de Leaflet
     const iconRetinaUrl = 'assets/marker-icon-2x.png';
     const iconUrl = 'assets/marker-icon.png';
     const shadowUrl = 'assets/marker-shadow.png';
@@ -124,6 +125,7 @@ export class RegistrarFichajePage {
       .openPopup();
   }
 
+  // Registrar fichaje de entrada con validación de datos
   registrarEntrada() {
     if (!this.usuarioLogueado || !this.trabajoSeleccionado || !this.latitud || !this.longitud) {
       alert('Selecciona trabajo y asegúrate de tener geolocalización.');
@@ -150,6 +152,7 @@ export class RegistrarFichajePage {
     });
   }
 
+  // Finalizar fichaje activo
   finalizarFichaje() {
     this.fichajesService.finalizarFichaje(this.fichajeActivo.IdFichaje).subscribe(async res => {
       const alert = await this.alertCtrl.create({
@@ -163,6 +166,7 @@ export class RegistrarFichajePage {
     });
   }
 
+  // Limpiar formulario y mapa
   limpiarCampos() {
     this.trabajoSeleccionado = undefined;
     this.latitud = undefined;
@@ -175,6 +179,7 @@ export class RegistrarFichajePage {
     }
   }
 
+  // Limpiar recursos del mapa al salir de la página
   ionViewWillLeave() {
     if (this.map) {
       this.map.remove();

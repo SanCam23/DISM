@@ -1,7 +1,7 @@
 'use strict';
 const connection = require('../config/database');
 
-// Obtener todas las API Keys
+// Obtener listado completo de API Keys
 const getApiKeys = async (req, res) => {
   console.log("GET /apikey llamado");
 
@@ -15,7 +15,7 @@ const getApiKeys = async (req, res) => {
   });
 };
 
-// Crear nueva API Key
+// Registrar nueva API Key en el sistema
 const createApiKey = async (req, res) => {
   const { Key } = req.body;
   console.log("POST /apikey llamado con:", req.body);
@@ -41,7 +41,7 @@ const createApiKey = async (req, res) => {
   );
 };
 
-// Obtener ApiKey por ID
+// Obtener información de API Key específica
 const getApiKeyById = async (req, res) => {
   const { id } = req.params;
   console.log(`GET /apikey/${id} llamado`);
@@ -58,7 +58,7 @@ const getApiKeyById = async (req, res) => {
   });
 };
 
-// Actualizar ApiKey
+// Actualizar API Key existente
 const updateApiKey = async (req, res) => {
   const { id } = req.params;
   const { Key } = req.body;
@@ -78,7 +78,7 @@ const updateApiKey = async (req, res) => {
   );
 };
 
-// Eliminar ApiKey
+// Eliminar API Key del sistema
 const deleteApiKey = async (req, res) => {
   const { id } = req.params;
   console.log(`DELETE /apikey/${id} llamado`);
@@ -93,7 +93,7 @@ const deleteApiKey = async (req, res) => {
   });
 };
 
-// Verificar ApiKey
+// Verificar validez de una API Key
 const verifyApiKey = async (req, res) => {
   const { key } = req.params;
   console.log(`GET /apikey/verificar/${key} llamado`);
@@ -110,7 +110,7 @@ const verifyApiKey = async (req, res) => {
   });
 };
 
-// Verifica si una key existe en BD y devuelve true/false
+// Validar existencia de API Key en base de datos
 const isApiKeyValid = (key) => {
   return new Promise((resolve) => {
     connection.query('SELECT * FROM ApiKey WHERE `Key` = ?', [key], (err, results) => {

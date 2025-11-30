@@ -2,17 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// --- AÑADE ESTA INTERFAZ ---
 export interface Usuario {
   IdUsuario?: number;
   Nombre: string;
   Usuario: string;
   Clave?: string; 
 }
-// ---------------------------
 
 export interface LoginResponse {
-  usuario: Usuario; // Ahora sí reconocerá "Usuario"
+  usuario: Usuario;
   message: string;
 }
 
@@ -24,10 +22,12 @@ export class UsuariosService {
 
   constructor(private http: HttpClient) {}
 
+  // Obtener listado completo de usuarios
   getUsuarios(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
+  // Autenticar usuario
   login(usuario: string, clave: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { Usuario: usuario, Clave: clave });
   }
