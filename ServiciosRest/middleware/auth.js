@@ -17,7 +17,7 @@ const checkApiKey = (req, res, next) => {
     }
     
     if (results.length > 0) {
-      // ¡Clave válida! Dejamos pasar la petición
+      // Clave válida, Dejamos pasar la petición
       next();
     } else {
       res.status(403).json({ error: 'API Key no válida.' });
